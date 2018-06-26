@@ -1,5 +1,32 @@
 .App {
-    background-color: rgba(42, 167, 148, 0.543);
+    background-color: black;
     width: 100%;
 
 }
+
+h1 {
+    text-align: center;
+    width: 100%;
+}
+
+p {
+    text-align: center;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    margin-left: 50px;
+}
+
+.jumbotron {
+-moz-border-radius: 25px;
+-webkit-border-radius: 25px;
+border-radius: 150px;
+
+
+color: white;
+padding: 22rem 2rem;
+background-image: url(http://www.electronicbeats.net/app/uploads/2017/08/80s-games-8bit-music-synths-1200x675.jpeg)
+}
+
+
+

@@ -6,7 +6,7 @@
   "scripts": {
     "server": "node server.js",
     "client": "cd client && npm run start",
-    "start": "./node_modules/.bin/concurrently \"./node_modules/.bin/nodemon\" \"npm run client\"",
+    "start": "concurrently \"./node_modules/.bin/nodemon\" \"npm run client\"",
     "build": "cd client && npm run build",
     "deploy": "yarn build && git add . && git commit -m \"Building for production\" && git push heroku master",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -23,5 +23,14 @@
     "matter-js": "^0.14.2",
     "path": "^0.12.7",
     "react-game-kit": "^1.0.6"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kyle2099/gamesomething.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Kyle2099/gamesomething/issues"
+  },
+  "homepage": "https://github.com/Kyle2099/gamesomething#readme"
 }
