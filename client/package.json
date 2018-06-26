@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "main": "index.js",
-
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "react": "^16.0.0",
