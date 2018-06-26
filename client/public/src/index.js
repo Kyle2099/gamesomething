@@ -1,5 +1,4 @@
-import Phaser from 'phaser';
-
+import 'phaser';
 
 var config = {
     type: Phaser.AUTO,
@@ -28,7 +27,7 @@ var score = 0;
 var gameOver = false;
 var scoreText;
 
-// var game = new Phaser.Game(config);
+var game = new Phaser.Game(config);
 
 function preload() {
     this.load.image('layer1', '../../../assets/Layer_0000_9.png');
