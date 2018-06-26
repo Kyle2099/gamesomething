@@ -1,27 +1,30 @@
 {
-  "name": "mern",
+  "name": "phaser3-examples",
   "version": "1.0.0",
-  "description": "Mern Demo",
-  "main": "server.js",
+  "description": "Phaser 3 Examples",
+  "main": "index.js",
   "scripts": {
-    "server": "node server.js",
-    "client": "cd client && npm run start",
-    "start": "./node_modules/.bin/concurrently \"./node_modules/.bin/nodemon\" \"npm run client\"",
-    "build": "cd client && npm run build",
-    "deploy": "yarn build && git add . && git commit -m \"Building for production\" && git push heroku master",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "installDeps": "yarn && cd client && yarn"
+    "postinstall": "npm start",
+    "start": "./node_modules/.bin/http-server -s -o",
+    "update": "node ./build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/photonstorm/phaser3-examples.git"
   },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/photonstorm/phaser3-examples/issues"
+  },
+  "homepage": "https://github.com/photonstorm/phaser3-examples#readme",
   "devDependencies": {
-    "concurrently": "^3.5.0",
-    "nodemon": "^1.11.0"
+    "http-server": "^0.9.0",
+    "monaco-editor": "^0.8.0",
+    "directory-tree": "^1.2.0"
   },
   "dependencies": {
-    "express": "^4.16.3",
-    "matter-js": "^0.14.2",
-    "path": "^0.12.7",
-    "react-game-kit": "^1.0.6"
+    "socket.io": "^2.1.1"
   }
 }

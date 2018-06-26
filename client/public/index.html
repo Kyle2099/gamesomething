@@ -1,46 +1,378 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-    <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Phaser 3 Examples</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/index.css">
+        <script src="./js/jquery-3.1.1.min.js"></script>
+        <script src="./js/getQueryString.js"></script>
+        <script src="./js/phaserSearch.js"></script>
+    </head>
+    <body>
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    
-    <div id="root"></div>
+    <nav class="breadcrumb" id="breadcrumb">
+        <a href="index.html"><img src="images/logo.png" width="144" height="31" /></a>
+		<div class="search">
+			<input id="search-query">
+			<div class="search-icon-wrapper">
+				<div class="search-icon">
+					<div class="search-icon-circle"></div>
+					<div class="search-icon-rectangle"></div>
+				</div>
+			</div>
+
+            <div id="search-results">
+
+            </div>
+		</div>
+        <a class="breadcrumb-item" href="index.html">Home</a>
+    </nav>
+
+    <div class="album">
+        <div class="container">
+            <div class="row" id="folderList"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+    var data = {};
+    var folder = [];
+    var trail = [];
+    var well = [];
+    var index = {};
+
+    function openFolder ()
+    {
+        $('#folderList').empty();
+
+        createBackFolder();
+
+        var isBootable = false;
+
+        for (var i = 0; i < folder.length; i++)
+        {
+            var child = folder[i];
+
+            if (child.name === 'boot.json')
+            {
+                isBootable = true;
+
+                break;
+            }
+        }
+
+        if (isBootable)
+        {
+            createBootFile(i, child.name, child.path);
+        }
+        else
+        {
+            for (var i = 0; i < folder.length; i++)
+            {
+                var child = folder[i];
+
+                if (child.hasOwnProperty('children'))
+                {
+                    createFolder(i, child.name, child.path);
+                }
+                else
+                {
+                    createFile(i, child.name, child.path);
+                }
+            }
+        }
+
+        //  Update browser history
+
+        var stateObj = { well: well };
+
+        history.pushState(stateObj, '', 'index.html' + getURLWell());
+    }
+
+    function getURLWell (skipLast, add)
+    {
+        if (skipLast === undefined) { skipLast = false; }
+
+        var output = '';
+        var len = (skipLast) ? well.length - 1 : well.length;
+
+        for (var i = 0; i < len; i++)
+        {
+            output = output.concat(encodeURI(well[i])) + '/';
+        }
+
+        if (add !== undefined)
+        {
+            output = output.concat(encodeURI(add)) + '/';
+        }
+
+        return '?dir=' + output + '&q=' + $('#search-query').val();
+    }
+
+    function addBreadcrumb (filename)
+    {
+        var nav = $('<a></a>', { class: 'breadcrumb-item', href: 'index.html' + getURLWell() }).text(filename);
+
+        $('#breadcrumb').append(nav);
+    }
+
+    function removeBreadcrumb ()
+    {
+        $('#breadcrumb > a').last().remove();
+    }
+
+    function downLevel (index, filename, skipOpen)
+    {
+        if (skipOpen === undefined) { skipOpen = false; }
+
+        if (!folder[index].hasOwnProperty('children'))
+        {
+            // console.log('No children, aborting');
+            return;
+        }
+
+        //  Record the trail
+        trail.push(folder);
+
+        folder = folder[index].children;
+
+        well.push(filename);
+
+        addBreadcrumb(filename);
+
+        if (!skipOpen)
+        {
+            openFolder();
+        }
+    }
+
+    function upLevel ()
+    {
+        removeBreadcrumb();
+
+        if (trail.length === 1)
+        {
+            createTopLevelFolders();
+        }
+        else
+        {
+            folder = trail[trail.length - 1];
+
+            trail.pop();
+
+            well.pop();
+
+            openFolder();
+        }
+    }
+
+    function createBackFolder ()
+    {
+        var div = $('<div></div>').addClass('card');
+
+        var a = $('<a></a>', { href: 'index.html' + getURLWell(true) });
+
+        var img = $('<img />', { src: 'images/back.png', width: 128, height: 128 });
+
+        img.click(function (event) {
+
+            // console.log('<- Back');
+
+            upLevel();
+        });
+
+        a.append(img);
+
+        var p = $('<p></p>').addClass('card-text');
+        p.append($('<a></a>', { href: 'index.html' + getURLWell(true) }).text('Back'));
+
+        div.append(a).append(p);
+
+        $('#folderList').append(div);
+    }
+
+    function createBootFile (index, filename, filepath)
+    {
+        var div = $('<div></div>').addClass('card');
+
+        var a = $('<a></a>', { href: 'boot.html?src=' + filepath });
+
+        var img = $('<img />', { src: 'images/joystick.png', width: 128, height: 128 });
+
+        a.append(img);
+
+        var p = $('<p></p>').addClass('card-text').text('Play Game');
+        // p.append($('<a></a>', { href: 'edit.html?src=' + filepath }).text(filename.replace('.js', '')));
+
+        div.append(a).append(p);
+
+        $('#folderList').append(div);
+    }
+
+    function createFile (index, filename, filepath)
+    {
+        if (filename.substr(0, 1) === '_')
+        {
+            return;
+        }
+
+        var div = $('<div></div>').addClass('card');
+
+        var a = $('<a></a>', { href: 'view.html?src=' + filepath });
+
+        var img = $('<img />', { src: 'images/doc.png', width: 128, height: 128 });
+
+        a.append(img);
+
+        var p = $('<p></p>').addClass('card-text');
+        p.append($('<a></a>', { href: 'edit.html?src=' + filepath }).text(filename.replace('.js', '')));
+
+        div.append(a).append(p);
+
+        $('#folderList').append(div);
+    }
+
+    function createFolder (index, filename, filepath)
+    {
+        if (filename === 'archived' || filename.substr(0, 1) === '_')
+        {
+            return;
+        }
+
+        var div = $('<div></div>').addClass('card');
+
+        var a = $('<a></a>', { href: 'index.html' + getURLWell(false, filename) });
+
+        var img = $('<img />', { src: 'images/phaser-folder.png', width: 128, height: 128 });
+
+        img.click(function (event) {
+
+            // console.log('-> ' + filename);
+
+            downLevel(index, filename);
+
+        });
+
+        a.append(img);
+
+        var p = $('<p></p>').addClass('card-text');
+        p.append($('<a></a>', { href: 'index.html' + getURLWell(false, filename) }).text(filename));
+
+        div.append(a).append(p);
+
+        $('#folderList').append(div);
+    }
+
+    function createTopLevelFolders ()
+    {
+        $('#folderList').empty();
+
+        trail = [];
+        well = [];
+        folder = data.children;
+
+        for (var i = 0; i < folder.length; i++)
+        {
+            createFolder(i, folder[i].name, folder[i].path);
+        }
+    }
+
+    function loadFolders (param)
+    {
+        trail = [];
+        well = [];
+        folder = data.children;
+
+        var dirs = [];
+        var raw = param.split('/');
+
+        for (var i = 0; i < raw.length; i++)
+        {
+            raw[i] = decodeURI(raw[i]);
+
+            if (raw[i] !== '')
+            {
+                dirs.push(raw[i]);
+            }
+        }
+
+        var current = data.children;
+
+        dirs.forEach(function(level) {
+
+            for (i = 0; i < current.length; i++)
+            {
+                if (current[i].name === level)
+                {
+                    downLevel(i, current[i].name, true);
+
+                    current = current[i].children;
+
+                    break;
+                }
+            }
+
+        });
+
+        openFolder();
+
+    }
+
+    $(document).ready(function () {
+
+        PHASER.search.initialize();
+
+        $.getJSON('examples.json', function (json) {
+
+            data = json;
+
+            var dir = getQueryString('dir');
+            var q = getQueryString('q');
+            
+            $('#search-query').val(q);
+            
+            if (q) {
+                search(q);
+            }
+
+            if (dir)
+            {
+                loadFolders(dir);
+            }
+            else
+            {
+                createTopLevelFolders();
+            }
+
+        });
+
+    });
+        
+    </script>
+
+
     <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+     This is the template for rendering search box results
+     -->
+    <script type="text/template" id="result-row-template">
+        <div class="result">
+            <a href="{{fullPath}}">
+                {{title}}
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+            </a>
+            <br>
+            <span class="relevancy">
+                Relevancy: {{score}}
+            </span>
+            <a href="?dir={{path}}" class="path">
+                {{path}}
+            </a>
+        </div>
+    </script>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+    </body>
 </html>

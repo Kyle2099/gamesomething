@@ -2,7 +2,15 @@ const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io').listen(server);
 
+io.on('connection', function (socket) {
+  console.log('a user connected');
+  socket.on('disconnect', function () {
+    console.log('user disconnected');
+  });
+});
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -17,3 +25,4 @@ app.get("*", function(req, res) {
 app.listen(PORT, function() {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });
+

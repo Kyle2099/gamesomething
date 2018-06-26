@@ -1,22 +1,15 @@
-import React, { Component } from "react";
-import app from "./App.css";
-import { Loop, Stage } from 'react-game-kit';
+
+import MyGame from "./game.js";
+import React from 'react-phaser';
 
 
-
-
-render() {
-  return (
-    <Loop>
-      <Stage>
-        <World>
-          <Body args={[0,0,75,75]} ref={ (b) => this.body = b.body }>
-            // Sprites go here
-          </Body>
-        </World>
-      </Stage>
-    </Loop>
-  );
-}
+class App extends Component {
+    MyGame = React.createClass({
+    	render: function () {
+			return <game/>;
+		}
+    });
+  }
+React.render(<MyGame/>, 'game');
 
 export default App;
