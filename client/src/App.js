@@ -1,18 +1,16 @@
-import React from "react";
-import Footer from "./components/Footer";
-import NavBar from "./components/NavBar";
-import Jumbotron from "./components/Jumbotron";
-import Game from "./components/Game";
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import Game from './src/index.js';
 
-const App = () => (
-  <div>
-    <NavBar></NavBar>
-    <Jumbotron></Jumbotron>
-    <Game></Game>
-    <Footer></Footer>
-  </div>
-);
-
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+      <Game />
+      </div>
+    );
+  }
+}
 
 export default App;
-
