@@ -1,7 +1,9 @@
 import Phaser from 'phaser';
 
 
-var config = {
+const Game = () => {
+
+    var config = {
     type: Phaser.AUTO,
     width: 850,
     height: 700,
@@ -198,3 +200,7 @@ function hitBomb(player, bomb) {
 
     gameOver = true;
 }
+return config
+}
+
+export default Game;
