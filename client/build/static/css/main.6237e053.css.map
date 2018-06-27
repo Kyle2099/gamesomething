@@ -1,1 +1,0 @@
-{"version":3,"sources":["App.css"],"names":[],"mappings":"AAAA,KACI,uCACA,UAAY","file":"static/css/main.6237e053.css","sourcesContent":[".App {\n    background-color: rgba(42, 167, 148, 0.543);\n    width: 100%;\n\n}\n\n\n// WEBPACK FOOTER //\n// ./src/App.css"],"sourceRoot":""}
