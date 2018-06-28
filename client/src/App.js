@@ -3,7 +3,8 @@ import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import Jumbotron from "./components/Jumbotron";
 import Game from "./components/Game";
-import {firebase} from "./firebase"
+import {firebase} from "./firebase";
+import API from "./utils/API";
 
 class App extends Component {
   state = { trueUser: null };
@@ -21,7 +22,14 @@ class App extends Component {
           this.setState({trueUser:null})
       }
     });
-  }
+  };
+
+  // componentDidMount() {
+  //   API.getQuestions("easy")
+  //     .then(res => {
+  //       console.log(res)
+  //     })
+  // }
 
   render() {
     return (
