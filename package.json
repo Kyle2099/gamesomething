@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "mern",
   "version": "1.0.0",
   "description": "Mern Demo",
@@ -27,5 +28,23 @@
     "matter-js": "^0.14.2",
     "path": "^0.12.7",
     "react-game-kit": "^1.0.6"
+=======
+  "name": "gamesomethingframe",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-materialize": "^2.3.2",
+    "react-phaser": "^0.1.6",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+>>>>>>> a79612a4dc6f2f62c248c4e0ac69e44eb8f16b87
   }
 }
