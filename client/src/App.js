@@ -4,10 +4,16 @@ import NavBar from "./components/NavBar";
 import Jumbotron from "./components/Jumbotron";
 import Game from "./components/Game";
 import {firebase} from "./firebase";
-import API from "./utils/API";
+import Question from './components/Questions'
+import API from './utils/API'
 
 class App extends Component {
-  state = { trueUser: null };
+  state = { 
+    trueUser: null,
+    question: '',
+    correctAnswer: '',
+    wrongAnswers: []
+  };
 
   componentDidMount(){
     firebase.auth.onAuthStateChanged(firebaseUser => {
@@ -24,18 +30,13 @@ class App extends Component {
     });
   };
 
-  // componentDidMount() {
-  //   API.getQuestions("easy")
-  //     .then(res => {
-  //       console.log(res)
-  //     })
-  // }
-
   render() {
     return (
       <div>
         <NavBar username={this.state.trueUser}></NavBar>
-        <Jumbotron></Jumbotron>
+        <Jumbotron>
+        </Jumbotron>
+          <Question/>
         <Game></Game>
         <Footer username={this.state.trueUser}></Footer>
       </div>
