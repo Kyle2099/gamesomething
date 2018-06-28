@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 
 
-class Countdown extends React.Component {
+class Countdown extends Component {
     constructor(props){
         super(props);
-        this.state = {currentCount: 10}
+        this.state = {currentCount: 15}
       }
       timer() {
         this.setState({
