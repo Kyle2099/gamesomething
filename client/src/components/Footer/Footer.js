@@ -21,10 +21,10 @@ const font = {
 };
 
 
-const Footer = () => (
+const Footer = (props) => (
 <footer style={style} className="footer">
 		<div style={font} className="container">
-			<span>Username:(username) | High Score: (highscore) </span>
+			<span>Username:{props.username} | High Score: (highscore) </span>
 		</div>
 	</footer>
 )
