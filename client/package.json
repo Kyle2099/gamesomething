@@ -2,15 +2,19 @@
   "name": "mern",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://kyle2099.github.io/gamesomething/",
   "main": "index.js",
   "proxy": "http://localhost:3001/",
   "dependencies": {
+    "gh-pages": "^1.2.0",
+    "phaser": "^3.10.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.14"
   },
   "scripts": {
-    "predeploy": "yarn build",
+    "predeploy": "npm run build",
+    "deploy": "git-directory-deploy --directory _dist --branch gh-pages",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
