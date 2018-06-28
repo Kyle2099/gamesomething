@@ -1,21 +1,23 @@
-import React from "react";
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import Footer from "./components/Footer";
+import React, { Component } from 'react';
 import './App.css';
 import NavBar from "./components/NavBar";
 import Jumbotron from "./components/Jumbotron";
-import Body from "./components/Body"
-
-const App = () => (
-  <div>
-    <NavBar></NavBar>
-    <Jumbotron></Jumbotron>
-    <Body></Body>
-    {/* <Footer></Footer> */}
-  </div>
-);
+import Game from './src/index.js';
+import HighScore from "./components/HighScore"
 
 
-
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+      <NavBar />
+      <HighScore />
+        <Jumbotron />
+      <Game />
+      </div>
+    )
+  }
+}
+    
 
 export default App;
