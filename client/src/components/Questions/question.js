@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import API from '../../utils/API'
 import Countdown from '../Countdown'
+import './question.css'
 
 class Question extends Component {
     state = {
@@ -26,16 +27,17 @@ class Question extends Component {
 
     render() {
         return (
-            <div class="container">
-                <div class="row">
-                    <div class="col s12 m6">
-                        <div class="card blue-grey darken-1">
-                            <div class="card-content white-text">
-                                <Countdown />
-                                <h2>Question</h2>
+            <div className="container left">
+                <div className="row">
+                    <div className="col s12 m6">
+                        <div className="card blue-grey darken-1">
+                            <div className="card-content white-text">
+                                <h2><Countdown /></h2>
                                 {this.state.question ? <h4>{this.state.question}</h4> : ""}
                                 {this.state.correctAnswer ? <h4>{this.state.correctAnswer}</h4> : ""}
-                                {this.state.wrongAnswers ? <h4>{this.state.wrongAnswers}</h4> : ""}
+                                <h4>{this.state.wrongAnswers[0]}</h4>
+                                <h4>{this.state.wrongAnswers[1]}</h4>
+                                <h4>{this.state.wrongAnswers[2]}</h4>
                             </div>
                         </div>
                     </div>
