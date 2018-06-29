@@ -9,14 +9,13 @@ class Countdown extends Component {
       currentCount: this.state.currentCount - 1
     })
     if (this.state.currentCount < 1) {
-      clearInterval(this.intervalId);
+      // clearInterval(this.intervalId);
       console.log('timer expired, playerWrong ++')
+      this.setState({currentCount: 5})
       this.props.handleTimeout();
-
     }
     else {
       console.log(this.state.currentCount);
-
     }
   }
   componentDidMount() {
