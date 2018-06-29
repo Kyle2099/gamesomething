@@ -59,9 +59,9 @@ class Question extends Component {
                     <div className="col s12 m6">
                         <div className="card blue-grey darken-1">
                             <div className="card-content white-text">
-                                <h2><Countdown /></h2>
+                                <h2><Countdown  handleTimeout={this.handleTimeout}/></h2>
                                 <div>
-                                    {this.state.questions[this.state.counter].question}
+                                    {/* {this.state.questions[this.state.counter].question} */}
                                     {/* <Button type="submit">{this.state.correctAnswers ? {this.state.correctAnswers} : ""}</Button><br />
                                     <br />
                                     <Button type="submit">{this.state.questions[this.state.count].correct_answer}
