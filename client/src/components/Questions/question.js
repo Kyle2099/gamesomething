@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import API from '../../utils/API'
-import Countdown from '../Countdown'
+import Countdown from '../Countdown/Countdown'
 import { Button } from 'react-materialize'
 import './question.css'
 
