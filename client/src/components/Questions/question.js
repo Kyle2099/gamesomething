@@ -11,7 +11,7 @@ class Question extends Component {
         allAnswers: [],
         playerScore: 0,
         playerWrong: 0,
-        disabled: true
+        isDisabled: false
     };
 
     componentWillMount() {
@@ -34,19 +34,21 @@ class Question extends Component {
     handleTimeout = () => {
         this.setState({
             playerWrong: this.state.playerWrong + 1,
-            counter: this.state.counter + 1//counter +1 (next question)
+            counter: this.state.counter + 1,//counter +1 (next question)
+            isDisabled: false
         })
     }
 
     clickCheck = event => {
         let answer = event.target.id
+        
         // console.log(event.target.id);
         if (answer === "correct") {
             // const score = this.state.playerScore + 1;
             // console.log("pre score is", this.state.playerScore);
-            this.setState({ playerScore: this.state.playerScore + 1 });
+            this.setState({ playerScore: this.state.playerScore + 1, isDisabled: !this.state.isDisabled});
         } else {
-            this.setState({ playerWrong: this.state.playerWrong + 1 });
+            this.setState({ playerWrong: this.state.playerWrong + 1, isDisabled: !this.state.isDisabled });
         } 
     }
 
@@ -62,10 +64,10 @@ class Question extends Component {
                                 <h2><Countdown handleTimeout={this.handleTimeout} /></h2>
                                 <div>
                                     {this.state.questions ? this.state.questions[this.state.counter].question : ''}<br /><br />
-                                    <div><Button type="submit" id="correct" onClick={this.clickCheck}>{this.state.questions ? this.state.questions[this.state.counter].correctAnswers : ''}</Button></div>
+                                    <div><Button type="submit" id="correct" disabled={this.state.isDisabled} onClick={this.clickCheck}>{this.state.questions ? this.state.questions[this.state.counter].correctAnswers : ''}</Button></div>
                                     <br />
                                     {this.state.questions ? this.state.questions[this.state.counter].wrongAnswers.map(answer => (
-                                        <div><Button type="submit" id="wrong" onClick={this.clickCheck}>{answer}</Button><br /><br /></div>
+                                        <div><Button type="submit" id="wrong" disabled={this.state.isDisabled} onClick={this.clickCheck}>{answer}</Button><br /><br /></div>
                                     )) : ""}
                                     <br />
                                 </div>
