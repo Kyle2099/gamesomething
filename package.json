@@ -25,6 +25,7 @@
     "express": "^4.15.4",
     "if-env": "^1.0.4",
     "mongoose": "^5.0.17",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "react-materialize": "^2.3.3"
   }
 }

@@ -5,7 +5,7 @@ import Jumbotron from "./components/Jumbotron";
 import Game from "./components/Game";
 import {firebase} from "./firebase";
 import Question from './components/Questions'
-import API from './utils/API'
+
 
 class App extends Component {
   state = { 
