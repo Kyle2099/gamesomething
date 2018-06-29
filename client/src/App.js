@@ -7,19 +7,21 @@ import Question from './components/Questions'
 
 
 class App extends Component {
-  state = { 
-    trueUser: null,
-    question: '',
+  state = {
+    question: [],
     correctAnswer: '',
-    wrongAnswers: []
-  };
+    wrongAnswers: [],
+    allAnswers: [],
+
+};
+
 
   componentDidMount(){
     firebase.auth.onAuthStateChanged(firebaseUser => {
       if(firebaseUser) {
-          console.log(`firebaseUser=${firebaseUser}`);
-          var trueUser = firebaseUser.email;
-          console.log("tU=" , trueUser);
+          //console.log(`firebaseUser=${firebaseUser}`);
+          var trueUser = firebaseUser.email;  
+          console.log("trueUs er=" , trueUser);
           this.setState({trueUser});
 
       } else {

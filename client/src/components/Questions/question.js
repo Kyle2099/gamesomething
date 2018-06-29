@@ -23,6 +23,13 @@ class Question extends Component {
             })
     }
 
+    handleTimeout = () => {
+        this.setState({
+            playerWrong: this.state.playerWrong +1,
+            //counter +1 (next question)
+        })
+    }
+
     clickCheck = event => {
         let answer = event.target.id
         // console.log(event.target.id);
@@ -44,7 +51,7 @@ class Question extends Component {
                     <div className="col s12 m6">
                         <div className="card blue-grey darken-1">
                             <div className="card-content white-text">
-                                <h2><Countdown /></h2>
+                                <h2><Countdown handleTimeout={this.handleTimeout} /></h2>
                                 {this.state.question ? <h3>{this.state.question}</h3> : ""}
                                 <Button id="correct" onClick={this.clickCheck}>{this.state.correctAnswer ? this.state.correctAnswer: ""}</Button><br />
                                 <br />
