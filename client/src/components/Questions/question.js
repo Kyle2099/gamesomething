@@ -26,10 +26,6 @@ class Question extends Component {
                         correctAnswers: res.data.results[i].correct_answer,
                         wrongAnswers: res.data.results[i].incorrect_answers
                     });
-
-                    // console.log("array", this.state.wrongAnswers)
-                    // console.log(this.state.correctAnswers)
-                    // console.log(this.state.wrongAnswers)
                 }
                 this.setState({ questions });
             })
@@ -49,6 +45,7 @@ class Question extends Component {
             // const score = this.state.playerScore + 1;
             // console.log("pre score is", this.state.playerScore);
             this.setState({ playerScore: this.state.playerScore + 1 });
+            console.log("correct clicked")
         } else {
             this.setState({ playerWrong: this.state.playerWrong + 1 });
         }
@@ -66,10 +63,10 @@ class Question extends Component {
                                 <h2><Countdown handleTimeout={this.handleTimeout} /></h2>
                                 <div>
                                     {this.state.questions ? this.state.questions[this.state.counter].question : ''}<br /><br />
-                                    <div><Button type="submit">{this.state.questions ? this.state.questions[this.state.counter].correctAnswers : ''}</Button></div>
+                                    <div><Button type="submit" id="correct" onClick={this.clickCheck}>{this.state.questions ? this.state.questions[this.state.counter].correctAnswers : ''}</Button></div>
                                     <br />
                                     {this.state.questions ? this.state.questions[this.state.counter].wrongAnswers.map(answer => (
-                                        <div><Button type="submit">{answer}</Button><br /><br /></div>
+                                        <div><Button type="submit" id="wrong" onClick={this.clickCheck}>{answer}</Button><br /><br /></div>
                                     )) : ""}
                                     <br />
                                 </div>
