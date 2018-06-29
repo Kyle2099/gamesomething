@@ -10,14 +10,14 @@ class Question extends Component {
         counter: 0,
         allAnswers: [],
         playerScore: 0,
-        playerWrong: 0
+        playerWrong: 0,
+        disabled: true
     };
 
     componentWillMount() {
         API.getQuestions("easy")
             .then(res => {
                 console.log(res.data.results)
-                // setState({ questions: res.data.results })
                 const questions = [];
 
                 for (let i = 0; i < 10; i++) {
@@ -45,10 +45,9 @@ class Question extends Component {
             // const score = this.state.playerScore + 1;
             // console.log("pre score is", this.state.playerScore);
             this.setState({ playerScore: this.state.playerScore + 1 });
-            console.log("correct clicked")
         } else {
             this.setState({ playerWrong: this.state.playerWrong + 1 });
-        }
+        } 
     }
 
     render() {
