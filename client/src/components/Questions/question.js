@@ -9,8 +9,14 @@ class Question extends Component {
         questions: [],
         correctAnswers: [],
         wrongAnswers: [],
+<<<<<<< HEAD
         all: [],
         counter: 0
+=======
+        allAnswers: [],
+        playerScore: 0, 
+        playerWrong: 0
+>>>>>>> ba5321b7f6ac61cfc673b3b021d834c8cbd769c3
     };
 
     componentWillMount() {
@@ -29,6 +35,7 @@ class Question extends Component {
             })
     }
 
+<<<<<<< HEAD
     nextQuestion = () => {
         this.setState({ counter: this.state.counter + 1 });
         console.log(this.state.counter)
@@ -61,14 +68,37 @@ class Question extends Component {
         // console.log(this.state.questions)
     }
 
+=======
+    handleTimeout = () => {
+        this.setState({
+            playerWrong: this.state.playerWrong +1,
+            //counter +1 (next question)
+        })
+    }
+
+    clickCheck = event => {
+        let answer = event.target.id
+        // console.log(event.target.id);
+        if (answer === "correct") {
+            // const score = this.state.playerScore + 1;
+            // console.log("pre score is", this.state.playerScore);
+            this.setState({ playerScore: this.state.playerScore + 1 });
+        } else {
+            this.setState({ playerWrong: this.state.playerWrong + 1});
+        }
+    }
+>>>>>>> ba5321b7f6ac61cfc673b3b021d834c8cbd769c3
 
     render() {
         return (
             <div className="container center">
                 <div className="row">
+                {console.log("score is", this.state.playerScore)}
+                {console.log("wrong guesses:", this.state.playerWrong)}
                     <div className="col s12 m6">
                         <div className="card blue-grey darken-1">
                             <div className="card-content white-text">
+<<<<<<< HEAD
                                 <h2><Countdown /></h2>
                                 {/* {this.state.questions ? <h3>{this.state.questions}</h3> : ""} */}
                                 {/* {console.log("questions in render", this.state.questions)} */}
@@ -77,6 +107,17 @@ class Question extends Component {
                                 <Button type="submit"><p>{this.state.wrongAnswers[0]}</p></Button><br />
                                 <br />
                                 <Button type="submit"><p>{this.state.wrongAnswers[1]}</p></Button><br />
+=======
+                                <h2><Countdown handleTimeout={this.handleTimeout} /></h2>
+                                {this.state.question ? <h3>{this.state.question}</h3> : ""}
+                                <Button id="correct" onClick={this.clickCheck}>{this.state.correctAnswer ? this.state.correctAnswer: ""}</Button><br />
+                                <br />
+                                <Button id="wrong" onClick={this.clickCheck}>{this.state.wrongAnswers[0]}</Button><br />
+                                <br />
+                                <Button id="wrong" onClick={this.clickCheck}>{this.state.wrongAnswers[1]}</Button><br />
+                                <br />
+                                <Button id="wrong" onClick={this.clickCheck}>{this.state.wrongAnswers[2]}</Button><br />
+>>>>>>> ba5321b7f6ac61cfc673b3b021d834c8cbd769c3
                                 <br />
                                 <Button type="submit"><p>{this.state.wrongAnswers[2]}</p></Button><br />
                                 <br /> */}

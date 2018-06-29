@@ -2,25 +2,26 @@ import React, {Component} from "react";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import Jumbotron from "./components/Jumbotron";
-import Game from "./components/Game";
 import {firebase} from "./firebase";
 import Question from './components/Questions'
 
 
 class App extends Component {
-  state = { 
-    trueUser: null,
-    question: '',
+  state = {
+    question: [],
     correctAnswer: '',
-    wrongAnswers: []
-  };
+    wrongAnswers: [],
+    allAnswers: [],
+
+};
+
 
   componentDidMount(){
     firebase.auth.onAuthStateChanged(firebaseUser => {
       if(firebaseUser) {
-          console.log(`firebaseUser=${firebaseUser}`);
-          var trueUser = firebaseUser.email;
-          console.log("tU=" , trueUser);
+          //console.log(`firebaseUser=${firebaseUser}`);
+          var trueUser = firebaseUser.email;  
+          console.log("trueUs er=" , trueUser);
           this.setState({trueUser});
 
       } else {
@@ -37,8 +38,7 @@ class App extends Component {
         <Jumbotron>
         </Jumbotron>
           <Question/>
-        <Game></Game>
-        <Footer username={this.state.trueUser}></Footer>
+        <Footer username={this.state.trueUser} pScore={this.state.playerScore}></Footer>
       </div>
     );
   }
