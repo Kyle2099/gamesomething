@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import Jumbotron from "./components/Jumbotron";
-import Game from "./components/Game";
 import {firebase} from "./firebase";
 import Question from './components/Questions'
 
@@ -37,8 +36,7 @@ class App extends Component {
         <Jumbotron>
         </Jumbotron>
           <Question/>
-        <Game></Game>
-        <Footer username={this.state.trueUser}></Footer>
+        <Footer username={this.state.trueUser} pScore={this.state.playerScore}></Footer>
       </div>
     );
   }
