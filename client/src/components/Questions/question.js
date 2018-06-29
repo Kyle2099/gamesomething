@@ -6,19 +6,59 @@ import './question.css'
 
 class Question extends Component {
     state = {
-        question: [],
-        correctAnswer: '',
+        questions: [],
+        correctAnswers: [],
         wrongAnswers: [],
-        allAnswers: [],
+        all: [],
+        counter: 0
     };
 
     componentWillMount() {
         API.getQuestions("easy")
             .then(res => {
-                this.setState({ question: res.data.results[0].question })
-                this.setState({ correctAnswer: res.data.results[0].correct_answer })
-                this.setState({ wrongAnswers: [...res.data.results[0].incorrect_answers] })
+                console.log(res.data.results)
+                // setState({ questions: res.data.results })
+                for (let i = 0; i < 10; i++) {
+                    this.setState({ questions: res.data.results[i].question })
+                    this.setState({ correctAnswers: res.data.results[i].correct_answer })
+                    this.setState({ wrongAnswers: [...res.data.results[i].incorrect_answers] })
+                    // console.log("array", this.state.wrongAnswers)
+                    // console.log(this.state.correctAnswers)
+                    // console.log(this.state.wrongAnswers)
+                }
             })
+    }
+
+    nextQuestion = () => {
+        this.setState({ counter: this.state.counter + 1 });
+        console.log(this.state.counter)
+        return (
+            <div>
+                {this.state.questions[this.state.counter].question}
+                <Button type="submit">{this.state.correctAnswers ? <p>{this.state.correctAnswers}</p> : ""}</Button><br />
+                <br />
+                <Button type="submit"><p>{this.state.questions[this.state.count].correct_answer}</p></Button><br />
+                <br />
+                <Button type="submit"><p>{this.state.questions[this.state.count].wrong_answer}</p></Button><br />
+                <br />
+                <Button type="submit"><p>{this.state.wrongAnswers[2]}</p></Button><br />
+                <br />
+            </div>
+        )
+
+        // this.state.questions.map(question => {
+        //     var uestio = question.question
+        //     var wrong = question.wrong
+        //     var right = question.right
+        //     return (
+
+        //     );
+        // })
+        // const counter = this.state.questions + 1;
+        // this.setState({
+
+        // })
+        // console.log(this.state.questions)
     }
 
 
@@ -30,17 +70,19 @@ class Question extends Component {
                         <div className="card blue-grey darken-1">
                             <div className="card-content white-text">
                                 <h2><Countdown /></h2>
-                                {this.state.question ? <h3>{this.state.question}</h3> : ""}
-                                <Button>{this.state.correctAnswer ? <p>{this.state.correctAnswer}</p> : ""}</Button><br />
+                                {/* {this.state.questions ? <h3>{this.state.questions}</h3> : ""} */}
+                                {/* {console.log("questions in render", this.state.questions)} */}
+                                {/* <Button type="submit">{this.state.correctAnswers ? <p>{this.state.correctAnswers}</p> : ""}</Button><br />
                                 <br />
-                                <Button><p>{this.state.wrongAnswers[0]}</p></Button><br />
+                                <Button type="submit"><p>{this.state.wrongAnswers[0]}</p></Button><br />
                                 <br />
-                                <Button><p>{this.state.wrongAnswers[1]}</p></Button><br />
+                                <Button type="submit"><p>{this.state.wrongAnswers[1]}</p></Button><br />
                                 <br />
-                                <Button><p>{this.state.wrongAnswers[2]}</p></Button><br />
-                                <br />
+                                <Button type="submit"><p>{this.state.wrongAnswers[2]}</p></Button><br />
+                                <br /> */}
+                                {this.nextQuestion()}
                             </div>
-                        </div>  
+                        </div>
                     </div>
                 </div>
             </div>
