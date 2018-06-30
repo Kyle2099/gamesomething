@@ -6,31 +6,31 @@ import './question.css'
 
 class Question extends Component {
     state = {
-        questions: [],
-        correctAnswers: [],
-        wrongAnswers: [],
+        questions: null,
         counter: 0,
         allAnswers: [],
         playerScore: 0,
-        playerWrong: 0
+        playerWrong: 0,
+        answerCorrect: null,
+        isDisabled: false
     };
 
     componentWillMount() {
         API.getQuestions("easy")
             .then(res => {
-                console.log(res.data.results)
-                // setState({ questions: res.data.results })
+                const questions = [];
                 for (let i = 0; i < 10; i++) {
-                    this.setState({ questions: res.data.results[i].question })
-                    this.setState({ correctAnswers: res.data.results[i].correct_answer })
-                    this.setState({ wrongAnswers: [...res.data.results[i].incorrect_answers] })
-                    // console.log("array", this.state.wrongAnswers)
-                    // console.log(this.state.correctAnswers)
-                    // console.log(this.state.wrongAnswers)
+                    questions.push({
+                        question: res.data.results[i].question,
+                        correctAnswers: res.data.results[i].correct_answer,
+                        wrongAnswers: res.data.results[i].incorrect_answers
+                    });
                 }
+                this.setState({ questions });
             })
     }
 
+<<<<<<< HEAD
     lossCondition = () => {
         this.setState({
             playerWrong: this.state.playerWrong +1,
@@ -39,15 +39,35 @@ class Question extends Component {
     }
 
 
+=======
+    handleTimeout = () => {
+        if (this.state.answerCorrect) {
+            this.setState({
+                playerScore: this.state.playerScore + 1,
+                counter: this.state.counter + 1,
+                isDisabled: false,
+                answerCorrect: null
+            })
+        } else {
+            this.setState({
+                playerWrong: this.state.playerWrong + 1,
+                counter: this.state.counter + 1,
+                isDisabled: false,
+                answerCorrect: null
+            })
+        }
+    }
+
+
+
+>>>>>>> 1eb996626cc0c9692e2f65c4bd1ff42c27254dbd
     clickCheck = event => {
         let answer = event.target.id
-        // console.log(event.target.id);
+
         if (answer === "correct") {
-            // const score = this.state.playerScore + 1;
-            // console.log("pre score is", this.state.playerScore);
-            this.setState({ playerScore: this.state.playerScore + 1 });
+            this.setState({ isDisabled: !this.state.isDisabled, answerCorrect: true });
         } else {
-            this.setState({ playerWrong: this.state.playerWrong + 1});
+            this.setState({ isDisabled: !this.state.isDisabled, answerCorrect: false });
         }
     }
 
@@ -60,19 +80,18 @@ class Question extends Component {
                     <div className="col s12 m6">
                         <div className="card blue-grey darken-1">
                             <div className="card-content white-text">
+<<<<<<< HEAD
                                 <h2><Countdown  lossCondition={this.lossCondition}/></h2>
+=======
+                                <h2><Countdown handleTimeout={this.handleTimeout} /></h2>
+>>>>>>> 1eb996626cc0c9692e2f65c4bd1ff42c27254dbd
                                 <div>
-                                    {/* {this.state.questions[this.state.counter].question} */}
-                                    {/* <Button type="submit">{this.state.correctAnswers ? {this.state.correctAnswers} : ""}</Button><br />
+                                    {this.state.questions ? this.state.questions[this.state.counter].question : ''}<br /><br />
+                                    <div><Button type="submit" id="correct" disabled={this.state.isDisabled} onClick={this.clickCheck}>{this.state.questions ? this.state.questions[this.state.counter].correctAnswers : ''}</Button></div>
                                     <br />
-                                    <Button type="submit">{this.state.questions[this.state.count].correct_answer}
-                                    </Button><br />
-                                    <br />
-                                    <Button type="submit">{this.state.questions[this.state.count].wrong_answer}
-                                    </Button><br />
-                                    <br />
-                                    <Button type="submit">{this.state.wrongAnswers[2]}
-                                    </Button><br /> */}
+                                    {this.state.questions ? this.state.questions[this.state.counter].wrongAnswers.map(answer => (
+                                        <div><Button type="submit" id="wrong" disabled={this.state.isDisabled} onClick={this.clickCheck}>{answer}</Button><br /><br /></div>
+                                    )) : ""}
                                     <br />
                                 </div>
                             </div>
