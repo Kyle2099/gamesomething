@@ -31,12 +31,13 @@ class Question extends Component {
             })
     }
 
-    handleTimeout = () => {
+    lossCondition = () => {
         this.setState({
             playerWrong: this.state.playerWrong +1,
             counter: this.state.counter + 1//counter +1 (next question)
         })
     }
+
 
     clickCheck = event => {
         let answer = event.target.id
@@ -59,7 +60,7 @@ class Question extends Component {
                     <div className="col s12 m6">
                         <div className="card blue-grey darken-1">
                             <div className="card-content white-text">
-                                <h2><Countdown  handleTimeout={this.handleTimeout}/></h2>
+                                <h2><Countdown  lossCondition={this.lossCondition}/></h2>
                                 <div>
                                     {/* {this.state.questions[this.state.counter].question} */}
                                     {/* <Button type="submit">{this.state.correctAnswers ? {this.state.correctAnswers} : ""}</Button><br />
