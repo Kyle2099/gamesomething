@@ -11,15 +11,14 @@ class Question extends Component {
         allAnswers: [],
         playerScore: 0,
         playerWrong: 0,
+        answerCorrect: null,
         isDisabled: false
     };
 
     componentWillMount() {
         API.getQuestions("easy")
             .then(res => {
-                console.log(res.data.results)
                 const questions = [];
-
                 for (let i = 0; i < 10; i++) {
                     questions.push({
                         question: res.data.results[i].question,
@@ -32,24 +31,33 @@ class Question extends Component {
     }
 
     handleTimeout = () => {
-        this.setState({
-            playerWrong: this.state.playerWrong + 1,
-            counter: this.state.counter + 1,//counter +1 (next question)
-            isDisabled: false
-        })
+        if (this.state.answerCorrect) {
+            this.setState({
+                playerScore: this.state.playerScore + 1,
+                counter: this.state.counter + 1,
+                isDisabled: false,
+                answerCorrect: null
+            })
+        } else {
+            this.setState({
+                playerWrong: this.state.playerWrong + 1,
+                counter: this.state.counter + 1,
+                isDisabled: false,
+                answerCorrect: null
+            })
+        }
     }
+
+
 
     clickCheck = event => {
         let answer = event.target.id
-        
-        // console.log(event.target.id);
+
         if (answer === "correct") {
-            // const score = this.state.playerScore + 1;
-            // console.log("pre score is", this.state.playerScore);
-            this.setState({ playerScore: this.state.playerScore + 1, isDisabled: !this.state.isDisabled});
+            this.setState({ isDisabled: !this.state.isDisabled, answerCorrect: true });
         } else {
-            this.setState({ playerWrong: this.state.playerWrong + 1, isDisabled: !this.state.isDisabled });
-        } 
+            this.setState({ isDisabled: !this.state.isDisabled, answerCorrect: false });
+        }
     }
 
     render() {
