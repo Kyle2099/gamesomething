@@ -30,7 +30,6 @@ class Question extends Component {
             })
     }
 
-<<<<<<< HEAD
     lossCondition = () => {
         this.setState({
             playerWrong: this.state.playerWrong +1,
@@ -39,28 +38,6 @@ class Question extends Component {
     }
 
 
-=======
-    handleTimeout = () => {
-        if (this.state.answerCorrect) {
-            this.setState({
-                playerScore: this.state.playerScore + 1,
-                counter: this.state.counter + 1,
-                isDisabled: false,
-                answerCorrect: null
-            })
-        } else {
-            this.setState({
-                playerWrong: this.state.playerWrong + 1,
-                counter: this.state.counter + 1,
-                isDisabled: false,
-                answerCorrect: null
-            })
-        }
-    }
-
-
-
->>>>>>> 1eb996626cc0c9692e2f65c4bd1ff42c27254dbd
     clickCheck = event => {
         let answer = event.target.id
 
@@ -80,11 +57,7 @@ class Question extends Component {
                     <div className="col s12 m6">
                         <div className="card blue-grey darken-1">
                             <div className="card-content white-text">
-<<<<<<< HEAD
                                 <h2><Countdown  lossCondition={this.lossCondition}/></h2>
-=======
-                                <h2><Countdown handleTimeout={this.handleTimeout} /></h2>
->>>>>>> 1eb996626cc0c9692e2f65c4bd1ff42c27254dbd
                                 <div>
                                     {this.state.questions ? this.state.questions[this.state.counter].question : ''}<br /><br />
                                     <div><Button type="submit" id="correct" disabled={this.state.isDisabled} onClick={this.clickCheck}>{this.state.questions ? this.state.questions[this.state.counter].correctAnswers : ''}</Button></div>
