@@ -6,7 +6,7 @@ import { Button } from 'react-materialize'
 
 class Answers extends Component {
     state = {
-        answer: answer.sort(()=> Math.random() - 0.5),
+        Answer: answer.sort(()=> Math.random() - 0.5),
         counter: 0,
         playerScore: 0,
         playerWrong: 0,
@@ -69,21 +69,22 @@ class Answers extends Component {
                     <div className="col s12 m6">
                         <div className="card blue-grey darken-1">
                             <div className="card-content white-text">
-                                <h2><Countdown handleTimeout={this.handleTimeout} /></h2>
-                                <div>
-                                    <div><Button type="submit" id="correct" disabled={this.state.isDisabled} onClick={this.clickCheck}>{this.state.answer ? this.state.answer[this.state.counter].correctAnswers : ''}</Button></div>
-                                    <br />
-                                    {this.state.answer ? this.state.answer[this.state.counter].wrongAnswers.map(answer => (
-                                        <div><Button type="submit" id="wrong" disabled={this.state.isDisabled} onClick={this.clickCheck}>{answer}</Button><br /><br /></div>
-                                    )) : ""}
-                                    <br />
+                            <h2><Countdown /></h2>
+                                {this.state.question ? <h3>{this.state.question}</h3> : ""}
+                                <Button id="correct" onClick={this.clickCheck}>{this.state.correctAnswer ? this.state.correctAnswer: ""}</Button><br />
+                                <br />
+                                <Button id="wrong" onClick={this.clickCheck}>{this.state.wrongAnswers[0]}</Button><br />
+                                <br />
+                                <Button id="wrong" onClick={this.clickCheck}>{this.state.wrongAnswers[1]}</Button><br />
+                                <br />
+                                <Button id="wrong" onClick={this.clickCheck}>{this.state.wrongAnswers[2]}</Button><br />
+                                <br />
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        );
+            }   </div>
+        )
     }
 }
 
