@@ -37,6 +37,8 @@ class Question extends Component {
         })
     }
 
+    
+
 
     clickCheck = event => {
         let answer = event.target.id
