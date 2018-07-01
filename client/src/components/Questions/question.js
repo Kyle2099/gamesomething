@@ -7,7 +7,7 @@ import './question.css'
 class Question extends Component {
     state = {
         question: [],
-        correctAnswer: '',
+        correctAnswer: correctAnswer.sort(() => Math.random() - 0.5),
         wrongAnswers: [],
         allAnswers: [],
         playerScore: 0, 

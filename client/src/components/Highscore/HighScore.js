@@ -4,6 +4,8 @@ import axios from 'axios';
 // import 'font-awesome/css/font-awesome.css'
 import Table from 'react-bootstrap/lib/Table'
 import Image from 'react-bootstrap/lib/Image'
+import "firebase/auth"
+
 
 
 class App extends Component {
@@ -51,12 +53,13 @@ class App extends Component {
 
 
   render() {
-    const { hs100Days, hs100All, current } = this.state;
+    const { hs100Days, hs100All, current, auth } = this.state;
     return (
       <div className="App container">
         <Table striped boardered condensed hover ClassName='colorLightblue'>
           <thread>
             <tr>
+            <Auth/>
               <th>ID</th>
               <th>User Name</th>
               <th onClick={() => this.scoreUpdate(true)}> Highest Score in the last 30 Days</th>
@@ -68,9 +71,9 @@ class App extends Component {
 
               <tr key={row.trueUser}>
                 <td>{index + 1}</td>
-                {/* <td><a href={`firebaseUser=${firebaseUser}`}>
+                <td><a href={`firebaseUser=${firebaseUser}`}>
                   <Image scr={row.image} className="imgHight" circle alt='User' /> {row.trueUser}
-            </a></td> */}
+            </a></td>
                 <td>{row.recent}</td>
                 <td>{row.allTime}</td>
               </tr>
@@ -81,8 +84,8 @@ class App extends Component {
               hs100All.map((row, index) => (
                 <tr key={row.trueUser}>
                   <td>{index + 1}</td>
-                  {/* <td><a href={`firebaseUser=${firebaseUser}`} >
-                    <Image src={row.img} className='imgHeight' circle alt='User' /> {row.trueUser}</a></td> */}
+                  <td><a href={`firebaseUser=${firebaseUser}`} >
+                    <Image src={row.img} className='imgHeight' circle alt='User' /> {row.trueUser}</a></td>
                   <td>{row.recent}</td>
                   <td>{row.alltime}</td>
                 </tr>
