@@ -6,9 +6,8 @@ import './question.css'
 
 class Question extends Component {
     state = {
-        questions: null,
+        questions: {},
         counter: 0,
-        allAnswers: [],
         playerScore: 0,
         playerWrong: 0,
         answerCorrect: null,
@@ -30,13 +29,44 @@ class Question extends Component {
             })
     }
 
-    lossCondition = () => {
-        this.setState({
-            playerWrong: this.state.playerWrong +1,
-            counter: this.state.counter + 1//counter +1 (next question)
-        })
-    }
+ 
+        // shuffle = () => {
+        //     let currentIndex = this.state.questions.length, temporaryValue, randomIndex;
 
+        //     // While there remain elements to shuffle...
+        //     while (0 !== currentIndex) {
+
+        //         // Pick a remaining element...
+        //         randomIndex = Math.floor(Math.random() * currentIndex);
+        //         currentIndex -= 1;
+
+        //         // And swap it with the current element.
+        //         temporaryValue = this.state.questions[currentIndex];
+        //         this.state.questions[currentIndex] = this.state.questions[randomIndex];
+        //         this.state.questions[randomIndex] = temporaryValue;
+        //     }
+
+        //     return this.state.questions;
+        // }
+    
+
+    handleTimeout = () => {
+        if (this.state.answerCorrect) {
+            this.setState({
+                playerScore: this.state.playerScore + 1,
+                counter: this.state.counter + 1,
+                isDisabled: false,
+                answerCorrect: null
+            })
+        } else {
+            this.setState({
+                playerWrong: this.state.playerWrong + 1,
+                counter: this.state.counter + 1,
+                isDisabled: false,
+                answerCorrect: null
+            })
+        }
+    }
 
     clickCheck = event => {
         let answer = event.target.id
@@ -48,7 +78,10 @@ class Question extends Component {
         }
     }
 
+
+
     render() {
+        this.shuffle()
         return (
             <div className="container center">
                 <div className="row">
@@ -57,7 +90,7 @@ class Question extends Component {
                     <div className="col s12 m6">
                         <div className="card blue-grey darken-1">
                             <div className="card-content white-text">
-                                <h2><Countdown  lossCondition={this.lossCondition}/></h2>
+                                <h2><Countdown handleTimeout={this.handleTimeout} /></h2>
                                 <div>
                                     {this.state.questions ? this.state.questions[this.state.counter].question : ''}<br /><br />
                                     <div><Button type="submit" id="correct" disabled={this.state.isDisabled} onClick={this.clickCheck}>{this.state.questions ? this.state.questions[this.state.counter].correctAnswers : ''}</Button></div>
@@ -77,4 +110,4 @@ class Question extends Component {
 }
 
 
-export default Question
+export default Question     
