@@ -29,7 +29,6 @@ class Question extends Component {
             })
     }
 
-<<<<<<< HEAD
     // shuffle = () => {
     //     let currentIndex = this.state.questions.length, temporaryValue, randomIndex;
 
@@ -56,11 +55,6 @@ class Question extends Component {
                 answerCorrect: null
             })
         }
-=======
-    endGame = () => {
-        console.log(this.state.questions);
-        return "Hey";
->>>>>>> 24958c5dc891a75e7f77b798354457afbd547df6
     }
 
     clickCheck = event => {
@@ -73,10 +67,6 @@ class Question extends Component {
         }
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 24958c5dc891a75e7f77b798354457afbd547df6
     render() {
         // this.shuffle()
         return (
