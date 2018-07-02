@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-// import Footer from "./components/Footer";
+//import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import Jumbotron from "./components/Jumbotron";
 import {firebase} from "./firebase";
@@ -21,9 +21,9 @@ class App extends Component {
   componentDidMount(){
     firebase.auth.onAuthStateChanged(firebaseUser => {
       if(firebaseUser) {
-          console.log(`firebaseUser=${firebaseUser}`);
+          //console.log(`firebaseUser=${firebaseUser}`);
           var trueUser = firebaseUser.email;  
-          console.log("trueUs er=" , trueUser);
+          //console.log("trueUser=" , trueUser);
           this.setState({trueUser})
           
 

@@ -5,10 +5,15 @@ import { Button } from 'react-materialize'
 import './question.css'
 import Footer from '../Footer'
 
+
+
+
 class Question extends Component {
     state = {
         questions: null,
         counter: 0,
+        playerScore: 0,
+        playerWrong: 0,
         answerCorrect: null,
         isDisabled: false
     };
