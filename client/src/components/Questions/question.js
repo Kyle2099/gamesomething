@@ -48,9 +48,32 @@ class Question extends Component {
     }   
     
 
-    endGame = () => {
-        console.log(this.state.questions);
-        return "Hey";
+    // shuffle = () => {
+    //     let currentIndex = this.state.questions.length, temporaryValue, randomIndex;
+
+    //     // While there remain elements to shuffle...
+    //     while (0 !== currentIndex) {
+
+    //         // Pick a remaining element...
+    //         randomIndex = Math.floor(Math.random() * currentIndex);
+    //         currentIndex -= 1;
+
+    handleTimeout = () => {
+        if (this.state.answerCorrect) {
+            this.setState({
+                playerScore: this.state.playerScore + 1,
+                counter: this.state.counter + 1,
+                isDisabled: false,
+                answerCorrect: null
+            })
+        } else {
+            this.setState({
+                playerWrong: this.state.playerWrong + 1,
+                counter: this.state.counter + 1,
+                isDisabled: false,
+                answerCorrect: null
+            })
+        }
     }
 
     clickCheck = event => {
@@ -62,7 +85,6 @@ class Question extends Component {
             this.setState({ isDisabled: !this.state.isDisabled, answerCorrect: false });
         }
     }
-
 
     render() {
         // this.shuffle()
