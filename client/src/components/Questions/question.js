@@ -29,6 +29,7 @@ class Question extends Component {
             })
     }
 
+<<<<<<< HEAD
     // shuffle = () => {
     //     let currentIndex = this.state.questions.length, temporaryValue, randomIndex;
 
@@ -55,6 +56,11 @@ class Question extends Component {
                 answerCorrect: null
             })
         }
+=======
+    endGame = () => {
+        console.log(this.state.questions);
+        return "Hey";
+>>>>>>> 24958c5dc891a75e7f77b798354457afbd547df6
     }
 
     clickCheck = event => {
@@ -67,6 +73,10 @@ class Question extends Component {
         }
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 24958c5dc891a75e7f77b798354457afbd547df6
     render() {
         // this.shuffle()
         return (
@@ -74,12 +84,13 @@ class Question extends Component {
                 <div className="row">
                     {console.log("score is", this.state.playerScore)}
                     {console.log("wrong guesses:", this.state.playerWrong)}
+                    {}
                     <div className="col s12 m6">
                         <div className="card blue-grey darken-1">
                             <div className="card-content white-text">
                                 <h2><Countdown handleTimeout={this.handleTimeout} /></h2>
                                 <div>
-                                    {this.state.questions ? this.state.questions[this.state.counter].question : ''}<br /><br />
+                                    {this.state.counter ? this.state.questions[this.state.counter].question : ''}<br /><br />
                                     <div><Button type="submit" id="correct" disabled={this.state.isDisabled} onClick={this.clickCheck}>{this.state.questions ? this.state.questions[this.state.counter].correctAnswers : ''}</Button></div>
                                     <br />
                                     {this.state.questions ? this.state.questions[this.state.counter].wrongAnswers.map(answer => (

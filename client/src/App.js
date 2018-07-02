@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar";
 import Jumbotron from "./components/Jumbotron";
 import {firebase} from "./firebase";
 import Question from './components/Questions'
+// import QuestionsDisplay from './components/QuestionDisplay'
 
 
 class App extends Component {
