@@ -2,6 +2,7 @@
   "name": "game_something",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://kyle2099.github.io/gamesomething",
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "axios": "^0.16.2",
@@ -13,6 +14,8 @@
     "react-scripts": "1.0.14"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
