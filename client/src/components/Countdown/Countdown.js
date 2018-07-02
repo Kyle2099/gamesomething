@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 
+
 class Countdown extends Component {
   state = { currentCount: 5 }
 
@@ -16,7 +17,7 @@ class Countdown extends Component {
     } else if (this.state.onClick) {
         this.setState({currentCount: this.state.currentCount + 1})
   } else {
-      console.log(this.state.currentCount);
+     // console.log(this.state.currentCount);
     }
   }
   componentDidMount() {

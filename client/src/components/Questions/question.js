@@ -8,8 +8,6 @@ class Question extends Component {
     state = {
         questions: null,
         counter: 0,
-        playerScore: 0,
-        playerWrong: 0,
         answerCorrect: null,
         isDisabled: false
     };
@@ -28,35 +26,7 @@ class Question extends Component {
                 this.setState({ questions });
             })
     }
-    
-    handleTimeout = () => {
-        if (this.state.answerCorrect) {
-            this.setState({
-                playerScore: this.state.playerScore + 1,
-                counter: this.state.counter + 1,
-                isDisabled: false,
-                answerCorrect: null
-            })
-        } else {
-            this.setState({
-                playerWrong: this.state.playerWrong + 1,
-                counter: this.state.counter + 1,
-                isDisabled: false,
-                answerCorrect: null
-            })
-        }
-    }   
-    
 
-    // shuffle = () => {
-    //     let currentIndex = this.state.questions.length, temporaryValue, randomIndex;
-
-    //     // While there remain elements to shuffle...
-    //     while (0 !== currentIndex) {
-
-    //         // Pick a remaining element...
-    //         randomIndex = Math.floor(Math.random() * currentIndex);
-    //         currentIndex -= 1;
 
     handleTimeout = () => {
         if (this.state.answerCorrect) {
