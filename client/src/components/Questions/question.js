@@ -6,7 +6,7 @@ import './question.css'
 
 class Question extends Component {
     state = {
-        questions: {},
+        questions: null,
         counter: 0,
         playerScore: 0,
         playerWrong: 0,
@@ -29,19 +29,33 @@ class Question extends Component {
             })
     }
 
- 
-        // shuffle = () => {
-        //     let currentIndex = this.state.questions.length, temporaryValue, randomIndex;
+    // shuffle = () => {
+    //     let currentIndex = this.state.questions.length, temporaryValue, randomIndex;
 
-        //     // While there remain elements to shuffle...
-        //     while (0 !== currentIndex) {
+    //     // While there remain elements to shuffle...
+    //     while (0 !== currentIndex) {
 
-        //         // Pick a remaining element...
-        //         randomIndex = Math.floor(Math.random() * currentIndex);
-        //         currentIndex -= 1;
+    //         // Pick a remaining element...
+    //         randomIndex = Math.floor(Math.random() * currentIndex);
+    //         currentIndex -= 1;
 
-    
-
+    handleTimeout = () => {
+        if (this.state.answerCorrect) {
+            this.setState({
+                playerScore: this.state.playerScore + 1,
+                counter: this.state.counter + 1,
+                isDisabled: false,
+                answerCorrect: null
+            })
+        } else {
+            this.setState({
+                playerWrong: this.state.playerWrong + 1,
+                counter: this.state.counter + 1,
+                isDisabled: false,
+                answerCorrect: null
+            })
+        }
+    }
 
     clickCheck = event => {
         let answer = event.target.id
@@ -53,10 +67,8 @@ class Question extends Component {
         }
     }
 
-
-
     render() {
-        this.shuffle()
+        // this.shuffle()
         return (
             <div className="container center">
                 <div className="row">
