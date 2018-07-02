@@ -6,7 +6,7 @@ import './question.css'
 
 class Question extends Component {
     state = {
-        questions: {},
+        questions: null,
         counter: 0,
         playerScore: 0,
         playerWrong: 0,
@@ -29,19 +29,10 @@ class Question extends Component {
             })
     }
 
- 
-        // shuffle = () => {
-        //     let currentIndex = this.state.questions.length, temporaryValue, randomIndex;
-
-        //     // While there remain elements to shuffle...
-        //     while (0 !== currentIndex) {
-
-        //         // Pick a remaining element...
-        //         randomIndex = Math.floor(Math.random() * currentIndex);
-        //         currentIndex -= 1;
-
-    
-
+    endGame = () => {
+        console.log(this.state.questions);
+        return "Hey";
+    }
 
     clickCheck = event => {
         let answer = event.target.id
@@ -54,20 +45,20 @@ class Question extends Component {
     }
 
 
-
     render() {
-        this.shuffle()
+        // this.shuffle()
         return (
             <div className="container center">
                 <div className="row">
-                    {console.log("score is", this.state.playerScore)}
-                    {console.log("wrong guesses:", this.state.playerWrong)}
+                    {/* {console.log("score is", this.state.playerScore)}
+                    {console.log("wrong guesses:", this.state.playerWrong)} */}
+                    {}
                     <div className="col s12 m6">
                         <div className="card blue-grey darken-1">
                             <div className="card-content white-text">
                                 <h2><Countdown handleTimeout={this.handleTimeout} /></h2>
                                 <div>
-                                    {this.state.questions ? this.state.questions[this.state.counter].question : ''}<br /><br />
+                                    {this.state.counter  ? this.state.questions[this.state.counter].question : () => ''}<br /><br />
                                     <div><Button type="submit" id="correct" disabled={this.state.isDisabled} onClick={this.clickCheck}>{this.state.questions ? this.state.questions[this.state.counter].correctAnswers : ''}</Button></div>
                                     <br />
                                     {this.state.questions ? this.state.questions[this.state.counter].wrongAnswers.map(answer => (
