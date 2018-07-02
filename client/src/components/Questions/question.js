@@ -89,15 +89,15 @@ class Question extends Component {
         return (
             <div className="container center">
                 <div className="row">
-                    {/* {console.log("score is", this.state.playerScore)}
-                    {console.log("wrong guesses:", this.state.playerWrong)} */}
+                    {console.log("score is", this.state.playerScore)}
+                    {console.log("wrong guesses:", this.state.playerWrong)}
                     {}
                     <div className="col s12 m6">
                         <div className="card blue-grey darken-1">
                             <div className="card-content white-text">
                                 <h2><Countdown handleTimeout={this.handleTimeout} /></h2>
                                 <div>
-                                    {this.state.counter  ? this.state.questions[this.state.counter].question : () => ''}<br /><br />
+                                    {this.state.counter ? this.state.questions[this.state.counter].question : ''}<br /><br />
                                     <div><Button type="submit" id="correct" disabled={this.state.isDisabled} onClick={this.clickCheck}>{this.state.questions ? this.state.questions[this.state.counter].correctAnswers : ''}</Button></div>
                                     <br />
                                     {this.state.questions ? this.state.questions[this.state.counter].wrongAnswers.map(answer => (
