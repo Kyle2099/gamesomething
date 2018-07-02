@@ -64,7 +64,7 @@ class NavBar extends Component{
         <Modal
             style={font}
             header='Please login or create a profile:'
-            trigger={<Button style={btn}>Login</Button>}>
+            trigger={<Button style={btn}>Login</Button>}> 
             <div className="modal-content">
                 <div className="modal-header">
                     <h6 className="modal-title" id="exampleModalLongTitle">Sign In</h6>
