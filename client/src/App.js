@@ -20,9 +20,9 @@ class App extends Component {
   componentDidMount(){
     firebase.auth.onAuthStateChanged(firebaseUser => {
       if(firebaseUser) {
-          console.log(`firebaseUser=${firebaseUser}`);
+          //console.log(`firebaseUser=${firebaseUser}`);
           var trueUser = firebaseUser.email;  
-          console.log("trueUs er=" , trueUser);
+          //console.log("trueUser=" , trueUser);
           this.setState({trueUser})
           
 
