@@ -4,7 +4,7 @@ const style = {
     position: "fixed",
     bottom: "0px",
     backgroundColor: "grey",
-    width: "100%",
+    width: "68%",
     height: "60px",
     marginTop: "0px", 
     borderTopStyle: "solid",
@@ -24,7 +24,7 @@ const font = {
 const Footer = (props) => (
 <footer style={style} className="footer">
 		<div style={font} className="container">
-			<span>Username:{props.username} | Correct Guesses: {props.playerScore} Wrong Guesses:{props.playerWrong} </span>
+			<span>Correct Guesses: {props.playerScore} Wrong Guesses:{props.playerWrong} </span>
 		</div>
 	</footer>
 )

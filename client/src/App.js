@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import Jumbotron from "./components/Jumbotron";
 import {firebase} from "./firebase";
 import Question from './components/Questions'
+
 
 
 class App extends Component {
@@ -12,17 +12,17 @@ class App extends Component {
     correctAnswer: '',
     wrongAnswers: [],
     allAnswers: [],
-    playerScore: 0,
-    playerWrong: 0
+    // playerScore: 0,
+    // playerWrong: 0
 
 };
 
   componentDidMount(){
     firebase.auth.onAuthStateChanged(firebaseUser => {
       if(firebaseUser) {
-          console.log(`firebaseUser=${firebaseUser}`);
+          //console.log(`firebaseUser=${firebaseUser}`);
           var trueUser = firebaseUser.email;  
-          console.log("trueUs er=" , trueUser);
+          //console.log("trueUser=" , trueUser);
           this.setState({trueUser})
           
 
@@ -41,7 +41,6 @@ class App extends Component {
         <Jumbotron>
         </Jumbotron>
           <Question/>
-        <Footer username={this.state.trueUser} playerScore={this.state.playerScore} playerWrong={this.state.playerWrong}></Footer>
       </div>
     );
   }
