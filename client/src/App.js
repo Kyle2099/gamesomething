@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import Jumbotron from "./components/Jumbotron";
 import {firebase} from "./firebase";
@@ -42,7 +42,6 @@ class App extends Component {
         <Jumbotron>
         </Jumbotron>
           <Question/>
-        <Footer username={this.state.trueUser} playerScore={this.state.playerScore} playerWrong={this.state.playerWrong}></Footer>
       </div>
     );
   }

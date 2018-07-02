@@ -3,6 +3,7 @@ import API from '../../utils/API'
 import Countdown from '../Countdown/Countdown'
 import { Button } from 'react-materialize'
 import './question.css'
+import Footer from '../Footer'
 
 class Question extends Component {
     state = {
@@ -26,7 +27,6 @@ class Question extends Component {
                 this.setState({ questions });
             })
     }
-
 
     handleTimeout = () => {
         if (this.state.answerCorrect) {
@@ -76,6 +76,7 @@ class Question extends Component {
                                         <div><Button type="submit" id="wrong" disabled={this.state.isDisabled} onClick={this.clickCheck}>{answer}</Button><br /><br /></div>
                                     )) : ""}
                                     <br />
+                                    <Footer playerScore={this.state.playerScore} playerWrong={this.state.playerWrong}></Footer>
                                 </div>
                             </div>
                         </div>
@@ -85,6 +86,5 @@ class Question extends Component {
         );
     }
 }
-
 
 export default Question     
