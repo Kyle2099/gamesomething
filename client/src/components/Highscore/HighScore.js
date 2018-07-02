@@ -1,13 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 
 
-class ResultsPage extends Component {
-  state = {
-    username: [],
-    correctguesses: [],
-    wrongguesses: []
-  };
+
 
 
 
