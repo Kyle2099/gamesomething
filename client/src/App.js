@@ -1,10 +1,9 @@
 import React, {Component} from "react";
-//import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import Jumbotron from "./components/Jumbotron";
 import {firebase} from "./firebase";
 import Question from './components/Questions'
-// import QuestionsDisplay from './components/QuestionDisplay'
+
 
 
 class App extends Component {
@@ -13,8 +12,8 @@ class App extends Component {
     correctAnswer: '',
     wrongAnswers: [],
     allAnswers: [],
-    playerScore: 0,
-    playerWrong: 0
+    // playerScore: 0,
+    // playerWrong: 0
 
 };
 
