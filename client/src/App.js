@@ -13,9 +13,10 @@ class App extends Component {
     correctAnswer: '',
     wrongAnswers: [],
     allAnswers: [],
+    playerScore: 0,
+    playerWrong: 0
 
 };
-
 
   componentDidMount(){
     firebase.auth.onAuthStateChanged(firebaseUser => {
@@ -23,13 +24,15 @@ class App extends Component {
           console.log(`firebaseUser=${firebaseUser}`);
           var trueUser = firebaseUser.email;  
           console.log("trueUs er=" , trueUser);
-          this.setState({trueUser});
+          this.setState({trueUser})
+          
 
       } else {
           console.log('not logged in');
           this.setState({trueUser:null})
       }
     });
+  
   };
 
   render() {
@@ -39,7 +42,7 @@ class App extends Component {
         <Jumbotron>
         </Jumbotron>
           <Question/>
-        <Footer username={this.state.trueUser} pScore={this.state.playerScore}></Footer>
+        <Footer username={this.state.trueUser} playerScore={this.state.playerScore} playerWrong={this.state.playerWrong}></Footer>
       </div>
     );
   }

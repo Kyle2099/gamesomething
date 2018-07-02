@@ -34,45 +34,6 @@ class Question extends Component {
         return "Hey";
     }
 
-
-    // shuffle = () => {
-    //     let currentIndex = this.state.questions.length, temporaryValue, randomIndex;
-
-    //     // While there remain elements to shuffle...
-    //     while (0 !== currentIndex) {
-
-    //         // Pick a remaining element...
-    //         randomIndex = Math.floor(Math.random() * currentIndex);
-    //         currentIndex -= 1;
-
-    //         // And swap it with the current element.
-    //         temporaryValue = this.state.questions[currentIndex];
-    //         this.state.questions[currentIndex] = this.state.questions[randomIndex];
-    //         this.state.questions[randomIndex] = temporaryValue;
-    //     }
-
-    //     return this.state.questions;
-    // }
-
-
-    handleTimeout = () => {
-        if (this.state.answerCorrect) {
-            this.setState({
-                playerScore: this.state.playerScore + 1,
-                counter: this.state.counter + 1,
-                isDisabled: false,
-                answerCorrect: null
-            })
-        } else {
-            this.setState({
-                playerWrong: this.state.playerWrong + 1,
-                counter: this.state.counter + 1,
-                isDisabled: false,
-                answerCorrect: null
-            })
-        }
-    }
-
     clickCheck = event => {
         let answer = event.target.id
 
