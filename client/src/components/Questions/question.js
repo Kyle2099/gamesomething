@@ -5,6 +5,17 @@ import { Button } from 'react-materialize'
 import './question.css'
 import Footer from '../Footer'
 
+const style = {
+    position: "fixed",
+    bottom: "0px",
+    backgroundColor: "grey",
+    width: "100%",
+    height: "60px",
+    marginTop: "0px", 
+    borderTopStyle: "solid",
+    borderTopColor: "orange"
+}
+
 class Question extends Component {
     state = {
         questions: null,
@@ -46,6 +57,13 @@ class Question extends Component {
         }
     }
 
+    endGame = () => {
+        console.log("ENDGAME");
+        if((this.state.playerScore + this.state.playerWrong) === 10) {
+            console.log("TOTAL IS TEN")
+        }
+    }
+
     clickCheck = event => {
         let answer = event.target.id
 
@@ -61,22 +79,24 @@ class Question extends Component {
         return (
             <div className="container center">
                 <div className="row">
-                    {console.log("score is", this.state.playerScore)}
-                    {console.log("wrong guesses:", this.state.playerWrong)}
+                    {/* {console.log("score is", this.state.playerScore)}
+                    {console.log("wrong guesses:", this.state.playerWrong)} */}
+                    {console.log("questions array", this.state.questions)}
+                    {console.log("counter:", this.state.counter)}
                     {}
                     <div className="col s12 m6">
                         <div className="card blue-grey darken-1">
                             <div className="card-content white-text">
                                 <h2><Countdown handleTimeout={this.handleTimeout} /></h2>
                                 <div>
-                                    {this.state.counter ? this.state.questions[this.state.counter].question : ''}<br /><br />
+                                    {this.state.questions ? this.state.questions[this.state.counter].question : this.endGame()}<br /><br />
                                     <div><Button type="submit" id="correct" disabled={this.state.isDisabled} onClick={this.clickCheck}>{this.state.questions ? this.state.questions[this.state.counter].correctAnswers : ''}</Button></div>
                                     <br />
                                     {this.state.questions ? this.state.questions[this.state.counter].wrongAnswers.map(answer => (
                                         <div><Button type="submit" id="wrong" disabled={this.state.isDisabled} onClick={this.clickCheck}>{answer}</Button><br /><br /></div>
-                                    )) : ""}
+                                    )) : this.endGame()}
                                     <br />
-                                    <Footer playerScore={this.state.playerScore} playerWrong={this.state.playerWrong}></Footer>
+                                    <Footer style={style} playerScore={this.state.playerScore} playerWrong={this.state.playerWrong}></Footer>
                                 </div>
                             </div>
                         </div>
