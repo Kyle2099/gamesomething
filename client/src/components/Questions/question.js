@@ -3,6 +3,7 @@ import API from '../../utils/API'
 import Countdown from '../Countdown/Countdown'
 import { Button } from 'react-materialize'
 import './question.css'
+import Footer from '../Footer'
 
 class Question extends Component {
     state = {
@@ -28,16 +29,6 @@ class Question extends Component {
                 this.setState({ questions });
             })
     }
-
-    // shuffle = () => {
-    //     let currentIndex = this.state.questions.length, temporaryValue, randomIndex;
-
-    //     // While there remain elements to shuffle...
-    //     while (0 !== currentIndex) {
-
-    //         // Pick a remaining element...
-    //         randomIndex = Math.floor(Math.random() * currentIndex);
-    //         currentIndex -= 1;
 
     handleTimeout = () => {
         if (this.state.answerCorrect) {
@@ -87,6 +78,7 @@ class Question extends Component {
                                         <div><Button type="submit" id="wrong" disabled={this.state.isDisabled} onClick={this.clickCheck}>{answer}</Button><br /><br /></div>
                                     )) : ""}
                                     <br />
+                                    <Footer playerScore={this.state.playerScore} playerWrong={this.state.playerWrong}></Footer>
                                 </div>
                             </div>
                         </div>
@@ -96,6 +88,5 @@ class Question extends Component {
         );
     }
 }
-
 
 export default Question     
