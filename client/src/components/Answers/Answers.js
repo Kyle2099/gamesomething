@@ -89,4 +89,4 @@ class Answers extends Component {
 }
 
 
-export default Question 
+export default Answer;

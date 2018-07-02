@@ -1,59 +1,83 @@
 import React, { Component } from 'react'
 import API from '../../utils/API'
-import Countdown from '../Countdown'
+import Countdown from '../Countdown/Countdown'
 import { Button } from 'react-materialize'
 import './question.css'
+import Footer from '../Footer'
 
 class Question extends Component {
     state = {
-        question: [],
-        correctAnswer: correctAnswer.sort(() => Math.random() - 0.5),
-        wrongAnswers: [],
-        allAnswers: [],
-        playerScore: 0, 
-        playerWrong: 0
+        questions: null,
+        counter: 0,
+        answerCorrect: null,
+        isDisabled: false
     };
 
     componentWillMount() {
         API.getQuestions("easy")
             .then(res => {
-                this.setState({ question: res.data.results[0].question })
-                this.setState({ correctAnswer: res.data.results[0].correct_answer })
-                this.setState({ wrongAnswers: [...res.data.results[0].incorrect_answers] })
+                const questions = [];
+                for (let i = 0; i < 10; i++) {
+                    questions.push({
+                        question: res.data.results[i].question,
+                        correctAnswers: res.data.results[i].correct_answer,
+                        wrongAnswers: res.data.results[i].incorrect_answers
+                    });
+                }
+                this.setState({ questions });
             })
+    }
+
+    handleTimeout = () => {
+        if (this.state.answerCorrect) {
+            this.setState({
+                playerScore: this.state.playerScore + 1,
+                counter: this.state.counter + 1,
+                isDisabled: false,
+                answerCorrect: null
+            })
+        } else {
+            this.setState({
+                playerWrong: this.state.playerWrong + 1,
+                counter: this.state.counter + 1,
+                isDisabled: false,
+                answerCorrect: null
+            })
+        }
     }
 
     clickCheck = event => {
         let answer = event.target.id
-        // console.log(event.target.id);
+
         if (answer === "correct") {
-            // const score = this.state.playerScore + 1;
-            // console.log("pre score is", this.state.playerScore);
-            this.setState({ playerScore: this.state.playerScore + 1 });
+            this.setState({ isDisabled: !this.state.isDisabled, answerCorrect: true });
         } else {
-            this.setState({ playerWrong: this.state.playerWrong + 1});
+            this.setState({ isDisabled: !this.state.isDisabled, answerCorrect: false });
         }
     }
 
     render() {
+        // this.shuffle()
         return (
             <div className="container center">
                 <div className="row">
-                {console.log("score is", this.state.playerScore)}
-                {console.log("wrong guesses:", this.state.playerWrong)}
+                    {console.log("score is", this.state.playerScore)}
+                    {console.log("wrong guesses:", this.state.playerWrong)}
+                    {}
                     <div className="col s12 m6">
                         <div className="card blue-grey darken-1">
                             <div className="card-content white-text">
-                                <h2><Countdown /></h2>
-                                {this.state.question ? <h3>{this.state.question}</h3> : ""}
-                                <Button id="correct" onClick={this.clickCheck}>{this.state.correctAnswer ? this.state.correctAnswer: ""}</Button><br />
-                                <br />
-                                <Button id="wrong" onClick={this.clickCheck}>{this.state.wrongAnswers[0]}</Button><br />
-                                <br />
-                                <Button id="wrong" onClick={this.clickCheck}>{this.state.wrongAnswers[1]}</Button><br />
-                                <br />
-                                <Button id="wrong" onClick={this.clickCheck}>{this.state.wrongAnswers[2]}</Button><br />
-                                <br />
+                                <h2><Countdown handleTimeout={this.handleTimeout} /></h2>
+                                <div>
+                                    {this.state.counter ? this.state.questions[this.state.counter].question : ''}<br /><br />
+                                    <div><Button type="submit" id="correct" disabled={this.state.isDisabled} onClick={this.clickCheck}>{this.state.questions ? this.state.questions[this.state.counter].correctAnswers : ''}</Button></div>
+                                    <br />
+                                    {this.state.questions ? this.state.questions[this.state.counter].wrongAnswers.map(answer => (
+                                        <div><Button type="submit" id="wrong" disabled={this.state.isDisabled} onClick={this.clickCheck}>{answer}</Button><br /><br /></div>
+                                    )) : ""}
+                                    <br />
+                                    <Footer playerScore={this.state.playerScore} playerWrong={this.state.playerWrong}></Footer>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -63,5 +87,4 @@ class Question extends Component {
     }
 }
 
-
-export default Question
+export default Question;

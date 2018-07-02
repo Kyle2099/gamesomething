@@ -9,10 +9,20 @@ import "firebase/auth"
             storageBucket: "weekendplanner-7a85f.appspot.com",
             messagingSenderId: "575676897778"
           };
-        if(!firebase.apps.length){
-            firebase.initializeApp(config);
-        }
+        // if(!firebase.apps.length){
+         const fire =   firebase.initializeApp(config);             
+        
+
+        
     const auth = firebase.auth();
+
+   
+
+  
+
+  
+
+
 
   
                 
@@ -47,8 +57,12 @@ import "firebase/auth"
         //     localStorage.clear();
             
         // });
-
+       
         export  {
             auth,
+            fire
+            
+            
         }
      
+    //  export default expObj;
