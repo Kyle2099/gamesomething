@@ -16,16 +16,6 @@ import "firebase/auth"
         
     const auth = firebase.auth();
 
-   
-
-  
-
-  
-
-
-
-  
-                
         // const txtEmail = document.getElementById('txtEmail');
         // const txtPassword = document.getElementById('txtPassword');
         // const btnLogin = document.getElementById('btnLogin');
@@ -59,10 +49,7 @@ import "firebase/auth"
         // });
        
         export  {
-            auth,
-            fire
-            
-            
+            auth
         }
      
     //  export default expObj;
